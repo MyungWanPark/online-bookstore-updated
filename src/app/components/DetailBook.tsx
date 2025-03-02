@@ -77,7 +77,7 @@ export default function DetailBook() {
     const INPUT_CSS = "p-1 outline-none border border-gray-300 rounded";
 
     return (
-        <section className="flex p-4">
+        <section className="flex p-4 max-w-screen-xl mx-auto">
             {isLoading && <div>로딩 중입니다...</div>}
             {book && (
                 <div className="grid md:grid-cols-2 place-items-center gap-5 md:gap-2">
@@ -94,7 +94,9 @@ export default function DetailBook() {
                         <p className="flex items-center">
                             <span className="mr-2">제목:</span>
                             {!isEditing ? (
-                                <h1 className="text-3xl font-bold">{title}</h1>
+                                <h1 className="md:text-2xl lg:text-3xl font-bold text-2xl">
+                                    {title}
+                                </h1>
                             ) : (
                                 <input
                                     className="w-1/2 p-2 rounded outline-none border border-gray-300"
@@ -192,7 +194,7 @@ export default function DetailBook() {
                                 <span>권</span>
                             </p>
                         </div>
-                        <div>
+                        <div className="mb-2">
                             <span>줄거리:</span>
                             {!isEditing ? (
                                 <p>{content}</p>
