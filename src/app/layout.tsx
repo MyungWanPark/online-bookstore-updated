@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import SWRConfigContext from "./context/SWRConfigContext";
 import Navbar from "./components/Navbar";
+import { initializeDB } from "@/lib/serverInit";
 
 const geistSans = localFont({
     src: "./fonts/GeistVF.woff",
@@ -20,11 +21,12 @@ export const metadata: Metadata = {
     description: "made by MyungWan",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    await initializeDB();
     return (
         <html lang="en">
             <body
