@@ -13,6 +13,8 @@ export default function SearchInput() {
 
     const [input, setInput] = useState(searchParams.get("q") || "");
     const [books, setBooks] = useState<Book[]>([]);
+    const [isOpen, setIsOpen] = useState(false);
+
     const { data: realTimeData } = useSWR(
         input.length > 0 ? `/api/books?q=${input}` : null
     );
@@ -28,25 +30,45 @@ export default function SearchInput() {
         }
     }, [realTimeData, input.length]);
 
+    useEffect(() => {
+        setIsOpen(false);
+        const handleClickOutside = (e: MouseEvent) => {
+            if (!(e.target as HTMLElement).closest(".search-container")) {
+                setIsOpen(false);
+            }
+        };
+        document.addEventListener("click", handleClickOutside);
+        return () => document.removeEventListener("click", handleClickOutside);
+    }, []);
+
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
         setInput(e.target.value);
+        setIsOpen(true);
+    };
+
+    const handleFocus = () => {
+        if (input.trim().length > 0) {
+            setIsOpen(true);
+        }
     };
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
         if (!input.trim()) return;
-        setBooks([]);
+        // setBooks([]);
+        setIsOpen(false);
         router.push(`/?q=${input}`);
     };
 
     return (
-        <section className="relative">
+        <section className="relative search-container">
             <form onSubmit={handleSearch} className="flex items-center">
                 <input
                     type="text"
                     value={input}
                     onChange={handleInput}
+                    onFocus={handleFocus}
                     placeholder="please type here..."
                     className="w-full px-4 py-2  rounded-l-md focus:outline-none focus:ring-1 focus:ring-blue-300"
                 />
@@ -57,8 +79,12 @@ export default function SearchInput() {
                     <CiSearch />
                 </button>
             </form>
-            {books && books.length > 0 && (
-                <KeywordResult books={books} setBooks={setBooks} />
+            {isOpen && books.length > 0 && (
+                <KeywordResult
+                    books={books}
+                    setBooks={setBooks}
+                    setIsOpen={setIsOpen}
+                />
             )}
         </section>
     );

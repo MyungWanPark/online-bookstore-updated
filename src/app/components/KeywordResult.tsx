@@ -5,13 +5,15 @@ import { useRouter } from "next/navigation";
 type Props = {
     books: Book[];
     setBooks: Dispatch<SetStateAction<Book[]>>;
+    setIsOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-export default function KeywordResult({ books, setBooks }: Props) {
+export default function KeywordResult({ books, setBooks, setIsOpen }: Props) {
     const router = useRouter();
 
     const handleClick = (id: number) => {
-        setBooks([]);
+        // setBooks([]);
+        setIsOpen(false);
         router.push(`/book/${id}`);
     };
     return (
