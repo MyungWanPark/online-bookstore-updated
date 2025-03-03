@@ -8,8 +8,8 @@ export async function getBooksWithPagination(
     const whereCondition = keyword
         ? {
               OR: [
-                  { title: { contains: keyword, mode: "insensitive" } },
-                  { author: { contains: keyword, mode: "insensitive" } },
+                  { title: { contains: keyword } },
+                  { author: { contains: keyword } },
               ],
           }
         : {};

@@ -14,7 +14,7 @@ export default function SearchInput() {
     const [input, setInput] = useState(searchParams.get("q") || "");
     const [books, setBooks] = useState<Book[]>([]);
     const { data: realTimeData } = useSWR(
-        input.length > 0 ? `/api/search?q=${input}` : null
+        input.length > 0 ? `/api/books?q=${input}` : null
     );
 
     useEffect(() => {
