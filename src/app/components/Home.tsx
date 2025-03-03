@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import useSWR from "swr";
 import { useSearchParams } from "next/navigation";
 import BookCards from "./BookCards";
@@ -33,19 +32,16 @@ export default function Home() {
     const searchParams = useSearchParams();
     const keyword = searchParams.get("q") || "";
     const page = parseInt(searchParams.get("page") || "1", 10);
+    const { data, isLoading, error } = useSWR(
+        `/api/books?page=${page}&q=${keyword}`
+    );
 
-    useEffect(() => {}, [page]);
-    const apiUrl = keyword
-        ? `/api/search?q=${keyword}&page=${page}`
-        : `/api/books?page=${page}`;
-
-    const { data, error } = useSWR(apiUrl);
-
+    if (isLoading) return <div>로딩 중...</div>;
     if (error) return <div>데이터를 불러오는 중 오류 발생</div>;
-    if (!data) return <div>로딩 중...</div>;
 
-    const books = data.books;
-    const totalPages = data.totalPages;
+    const { totalPages } = data;
+    const { books } = data;
+
     const PaginationButtonArr = getPaginaionButtons(page, totalPages);
 
     return (

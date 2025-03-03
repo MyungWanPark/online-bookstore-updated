@@ -1,5 +1,3 @@
-"use server";
-
 import { prisma } from "@/lib/prisma";
 import { Book } from "@/model/book";
 import { Prisma } from "@prisma/client";
@@ -12,8 +10,12 @@ export async function addManyBooks(books: Prisma.BookCreateManyInput[]) {
     return await prisma.book.createMany({ data: books });
 }
 
-export async function getBooks() {
-    return await prisma.book.findMany();
+export async function getBooks(condition: {}) {
+    return await prisma.book.findMany(condition);
+}
+
+export async function getBookCount(condition: {}) {
+    return await prisma.book.count(condition);
 }
 
 export async function getBookById(id: number) {

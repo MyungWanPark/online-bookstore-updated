@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { prisma } from "./prisma";
-import { addManyBooks } from "@/app/actions/bookActions";
+import { addManyBooks } from "@/APIs/book";
 
 export async function initializeDB() {
     const count = await prisma.book.count();
