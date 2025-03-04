@@ -4,7 +4,7 @@ CREATE TABLE `Book` (
     `title` VARCHAR(191) NOT NULL,
     `author` VARCHAR(191) NOT NULL,
     `genre` VARCHAR(191) NOT NULL,
-    `content` VARCHAR(191) NOT NULL,
+    `content` TEXT NOT NULL,
     `price` INTEGER NOT NULL,
     `quantity` INTEGER NOT NULL,
     `publisher` VARCHAR(191) NOT NULL,
