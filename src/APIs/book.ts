@@ -10,11 +10,11 @@ export async function addManyBooks(books: Prisma.BookCreateManyInput[]) {
     return await prisma.book.createMany({ data: books });
 }
 
-export async function getBooks(condition: {}) {
+export async function getBooks(condition: Prisma.BookFindManyArgs) {
     return await prisma.book.findMany(condition);
 }
 
-export async function getBookCount(condition?: {}) {
+export async function getBookCount(condition?: Prisma.BookWhereInput) {
     return await prisma.book.count({ where: condition });
 }
 

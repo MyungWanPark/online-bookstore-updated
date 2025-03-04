@@ -1,7 +1,7 @@
 "use client";
 
 import { Book } from "@/model/book";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { FormEvent, useState } from "react";
 import NewBookInput from "../components/NewBookInput";
 import { useRouter } from "next/navigation";
 import { makeDummyData } from "@/util/book";

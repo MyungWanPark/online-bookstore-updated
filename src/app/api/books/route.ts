@@ -1,4 +1,3 @@
-import { addBook } from "@/APIs/book";
 import { addBookWithImg, getBooksWithPagination } from "@/service/book";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -27,7 +26,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json(Book);
     } catch (err) {
         return NextResponse.json(
-            { err: "책 등록에 실패하였습니다." },
+            { err: `책 등록에 실패하였습니다. 메세지: ${err}` },
             { status: 500 }
         );
     }

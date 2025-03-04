@@ -1,5 +1,3 @@
-import { Dispatch, SetStateAction } from "react";
-
 type Props = {
     title: string;
     inputClass: string;
