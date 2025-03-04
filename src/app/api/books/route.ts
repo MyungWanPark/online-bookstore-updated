@@ -1,4 +1,5 @@
-import { getBooksWithPagination } from "@/service/book";
+import { addBook } from "@/APIs/book";
+import { addBookWithImg, getBooksWithPagination } from "@/service/book";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -16,4 +17,18 @@ export async function GET(req: NextRequest) {
         books,
         totalPages,
     });
+}
+
+export async function POST(request: NextRequest) {
+    const bookData = await request.json();
+
+    try {
+        const Book = await addBookWithImg(bookData);
+        return NextResponse.json(Book);
+    } catch (err) {
+        return NextResponse.json(
+            { err: "책 등록에 실패하였습니다." },
+            { status: 500 }
+        );
+    }
 }

@@ -14,7 +14,7 @@ export async function getBooks(condition: {}) {
     return await prisma.book.findMany(condition);
 }
 
-export async function getBookCount(condition: {}) {
+export async function getBookCount(condition?: {}) {
     return await prisma.book.count({ where: condition });
 }
 

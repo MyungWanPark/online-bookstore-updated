@@ -56,7 +56,6 @@ export default function SearchInput() {
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
         if (!input.trim()) return;
-        // setBooks([]);
         setIsOpen(false);
         router.push(`/?q=${input}`);
     };
@@ -80,11 +79,7 @@ export default function SearchInput() {
                 </button>
             </form>
             {isOpen && books.length > 0 && (
-                <KeywordResult
-                    books={books}
-                    setBooks={setBooks}
-                    setIsOpen={setIsOpen}
-                />
+                <KeywordResult books={books} setIsOpen={setIsOpen} />
             )}
         </section>
     );

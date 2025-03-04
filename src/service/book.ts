@@ -1,4 +1,5 @@
-import { getBookCount, getBooks } from "@/APIs/book";
+import { addBook, getBookCount, getBooks } from "@/APIs/book";
+import { Book } from "@/model/book";
 
 export async function getBooksWithPagination(
     page: number,
@@ -21,7 +22,15 @@ export async function getBooksWithPagination(
         where: whereCondition,
         skip: (page - 1) * perPage,
         take: perPage,
+        orderBy: { id: "desc" },
     });
 
     return { books, totalPages };
+}
+
+export async function addBookWithImg(bookData: Omit<Book, "id" | "imageUrl">) {
+    const count = await getBookCount();
+    const imageUrl = `https://picsum.photos/seed/${count + 1}/300/200`;
+    const book = await addBook({ ...bookData, imageUrl });
+    return book;
 }

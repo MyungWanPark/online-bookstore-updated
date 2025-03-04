@@ -2,6 +2,11 @@ import { faker } from "@faker-js/faker";
 import { prisma } from "./prisma";
 import { addManyBooks } from "@/APIs/book";
 
+export const getRandomPrice = () => {
+    const number = faker.datatype.number({ min: 10, max: 20 });
+    return number * 1000;
+};
+
 export async function initializeDB() {
     const count = await prisma.book.count();
     const isDataExist = count !== 0 ? true : false;
@@ -38,11 +43,6 @@ export async function initializeDB() {
 
         const getRandomElement = (arr: string[]) =>
             arr[Math.floor(Math.random() * arr.length)];
-
-        const getRandomPrice = () => {
-            const number = faker.datatype.number({ min: 10, max: 20 });
-            return number * 1000;
-        };
 
         const BOOKS = Array.from({ length: 105 }, (_, i) => ({
             title: `${getRandomElement(commonTitles)} ${faker.lorem.words(3)}`,
