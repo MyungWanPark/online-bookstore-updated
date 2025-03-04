@@ -20,7 +20,7 @@ export default function NewBookInput({
     setValue,
 }: Props) {
     return (
-        <div className="flex items-center">
+        <div className="flex items-center mt-3">
             <label htmlFor={inputName} className="block flex-[1] text-center">
                 {title}
             </label>

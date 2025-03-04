@@ -97,7 +97,9 @@ export default function NewBookPage() {
     ];
     return (
         <section>
-            <h2>새로운 책 등록</h2>
+            <h2 className="font-bold text-center text-xl my-3">
+                새로운 책 등록
+            </h2>
             <form onSubmit={handleSubmit}>
                 {BOOKINPUTS.map(
                     ({ title, inputClass, inputName, isTextArea }, id) => {
@@ -116,7 +118,7 @@ export default function NewBookPage() {
                 )}
                 <button
                     type="submit"
-                    className="w-full bg-blue-500 text-white p-2 rounded"
+                    className="w-full bg-blue-500 text-white p-2 rounded mt-5"
                 >
                     {isLoading ? "등록중" : "등록하기"}
                 </button>
